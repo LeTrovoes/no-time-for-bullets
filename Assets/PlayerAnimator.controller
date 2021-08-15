@@ -9,7 +9,7 @@ BlendTree:
   m_Name: Movement
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 8be8374226cf74b40a417178904b4c9a, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 5202ab336f7dc864ea523ace8b19da76, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -17,7 +17,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: a3de33b1f9249da4aaf36665403e47b1, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 8b18caf9098dcfb41898bcfd917b245b, type: 3}
     m_Threshold: 0.125
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
@@ -25,7 +25,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 4028719e1d1d04343a8d15a7e0ba021d, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 0eb5b259050e3b94eb19a1a2cebf96da, type: 3}
     m_Threshold: 0.25
     m_Position: {x: 0.7, y: 0.7}
     m_TimeScale: 1
@@ -33,7 +33,7 @@ BlendTree:
     m_DirectBlendParameter: VelocityX
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 1f66a48033aec244aba70f5fe6ae5a2a, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 2e73809e478942a4783c659ea84d3994, type: 3}
     m_Threshold: 0.375
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
@@ -41,7 +41,7 @@ BlendTree:
     m_DirectBlendParameter: VelocityX
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 3f82d3382d16644428df36668b159c13, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 0925853c057eace48a49efe6a83ec2c8, type: 3}
     m_Threshold: 0.5
     m_Position: {x: 0.7, y: -0.7}
     m_TimeScale: 1
@@ -49,7 +49,7 @@ BlendTree:
     m_DirectBlendParameter: VelocityX
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 58b04b3b309d0e444b94a51dedcac272, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 04c064fcec6728b4fb19ddf144158c98, type: 3}
     m_Threshold: 0.625
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
@@ -57,7 +57,7 @@ BlendTree:
     m_DirectBlendParameter: VelocityX
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 6a3674b40dd554d45baa65f39a164621, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 7e61d6cad8ad51a4e9393bfe209adc0f, type: 3}
     m_Threshold: 0.75
     m_Position: {x: -0.7, y: -0.7}
     m_TimeScale: 1
@@ -65,7 +65,7 @@ BlendTree:
     m_DirectBlendParameter: VelocityX
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: d5458b0715a646f4596e40f5482288af, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: 315d1611a1da93f4db3c5c4fa0c7b463, type: 3}
     m_Threshold: 0.875
     m_Position: {x: -1, y: 0}
     m_TimeScale: 1
@@ -73,7 +73,7 @@ BlendTree:
     m_DirectBlendParameter: VelocityX
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: fdd6c976ca72b1f4aaacf1490930c15a, type: 2}
+    m_Motion: {fileID: -203655887218126122, guid: bd057808d20bfbd49bbf8165413cb1d4, type: 3}
     m_Threshold: 1
     m_Position: {x: -0.7, y: 0.7}
     m_TimeScale: 1
@@ -101,13 +101,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: VelocityZ
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -128,7 +128,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Blend Tree
+  m_Name: Rifle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -158,14 +158,14 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 5519053058193660430}
-    m_Position: {x: 30, y: 230, z: 0}
+    m_Position: {x: 260, y: 230, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_EntryPosition: {x: -80, y: 230, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 5519053058193660430}

@@ -3,8 +3,8 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
-    [SerializeField]
-    [Range(0, 100)]
+    const float AIM_ERROR = 0.12f;
+
     private float initialLife;
 
     private float life;
@@ -15,14 +15,16 @@ public class EnemyScript : MonoBehaviour
     [SerializeField]
     private Transform firePoint;
 
+    [SerializeField]
+    private GameObject bodySurface;
+
     Vector3 lookDirection = Vector3.forward;
 
     NavMeshAgent agent;
 
     private float triggerTimer = 0f;
 
-    [SerializeField]
-    Transform playerTransform;
+    private Transform playerTransform;
 
     private Material bodyMaterial;
 
@@ -32,27 +34,41 @@ public class EnemyScript : MonoBehaviour
     [SerializeField]
     private GameObject secondGunPrafab;
 
+    [SerializeField]
+    private AudioSource gunAudioSource;
+
+    [SerializeField]
+    private AudioSource walkAudioSource;
+
+    [SerializeField]
+    private AudioClip shotSFX;
+
     private int   gunDamage;
     private float gunFirePeriod;
     private int   gunCapacity;
     private int   remainingShots;
 
     private bool isGunOne = true;
+    private bool isWalking = false;
+
+    private Animator animator;
 
     void Start()
     {
-
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-
+        initialLife = GameManager.Instance.initialEnemyLife;
         life = initialLife;
-        agent = GetComponent<NavMeshAgent>();
 
-        bodyMaterial = GetComponent<Renderer>().material;
+        agent = GetComponent<NavMeshAgent>();
+        agent.enabled = true;
+
+        bodyMaterial = bodySurface.GetComponent<Renderer>().material;
+        animator = GetComponent<Animator>();
 
         SetColor();
 
         GunScript gs;
-        if (Random.Range(0f,1f) <= 0.7f)
+        if (Random.Range(0f, 1f) <= 0.7f)
         {
             Instantiate(firstGunPrafab, firePoint);
             gs = firstGunPrafab.GetComponent<GunScript>();
@@ -68,20 +84,51 @@ public class EnemyScript : MonoBehaviour
         remainingShots = gunCapacity;
     }
 
+    private void Update()
+    {
+        if (GameManager.Instance.running)
+        {
+            walkAudioSource.Pause();
+        }
+    }
+
     private void FixedUpdate()
     {
-        bool playerInSight = false;
-        for (int i = 0; i < 5; i++)
+        if (GameManager.Instance.running)
         {
-            playerInSight = SeekPlayer();
+            bool playerInSight = false;
+            for (int i = 0; i < 5; i++)
+            {
+                playerInSight = SeekPlayer();
+            }
+
+            EvaluateAction(playerInSight);
         }
 
-        EvaluateAction(playerInSight);
+        Vector3 movement = (agent.velocity).normalized;
+
+        float velocityZ = Vector3.Dot(movement, transform.forward);
+        float velocityX = Vector3.Dot(movement, transform.right);
+
+        animator.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
+        animator.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
+
+        if (movement.magnitude > 0.001f)
+        {
+            if (!isWalking)
+            {
+                isWalking = true;
+                walkAudioSource.Play();
+            }
+        } else
+        {
+            walkAudioSource.Stop();
+            isWalking = false;
+        }
     }
 
     bool SeekPlayer()
     {
-        // Debug.DrawLine(transform.position, transform.position + lookDirection * lookRadius, Color.magenta, 2f);
 
         RaycastHit hit;
         Ray ray = new Ray(transform.position, lookDirection);
@@ -103,8 +150,8 @@ public class EnemyScript : MonoBehaviour
     private void EvaluateAction(bool playerInSight)
     {
         triggerTimer += Time.deltaTime;
-        // float distanceToPlayer = Vector3.Distance(playerTransform.position, transform.position);
-        if (/* distanceToPlayer <= 20f && */playerInSight)
+        float distanceToPlayer = Vector3.Distance(playerTransform.position, transform.position);
+        if (distanceToPlayer <= 20f && playerInSight)
         {
             if (triggerTimer >= gunFirePeriod + Random.Range(0.5f, 1.5f) + (remainingShots > 0 ? 0 : 3))
             {
@@ -122,7 +169,9 @@ public class EnemyScript : MonoBehaviour
 
     private void FireGun()
     {
-        Vector3 precisionDisturbance = new Vector3(Random.Range(-0.15f, 0.15f), Random.Range(-0.15f, 0.15f), 0);
+        gunAudioSource.PlayOneShot(shotSFX);
+
+        Vector3 precisionDisturbance = new Vector3(Random.Range(-AIM_ERROR, AIM_ERROR), Random.Range(-AIM_ERROR, AIM_ERROR), 0);
         Vector3 aim = (firePoint.transform.forward + precisionDisturbance).normalized;
         Ray bulletRay = new Ray(firePoint.position, aim);
         RaycastHit hit;

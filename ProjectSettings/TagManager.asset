@@ -7,11 +7,15 @@ TagManager:
   - Enemy
   - PickUp
   - Drop
+  - Maze
+  - Ground
+  - NavMesh
+  - Heal
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - 

@@ -4,15 +4,11 @@ public class PickUpController : MonoBehaviour
 {
     [SerializeField]
     private float speed;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    private Vector3 rotation = new Vector3(12, 30, 45);
+
     void Update()
     {
-        this.transform.Rotate(new Vector3(12, 30, 45) * Time.deltaTime * speed);
+        transform.Rotate(speed * Time.deltaTime * rotation);
     }
 }
